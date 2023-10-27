@@ -208,7 +208,7 @@ public class Verwaltung implements Utility {
 		int anzahlArbeiter = 0;
 
 		for (Mitarbeiter dieserMitarbeiter : mitarbeiterListe) {
-			if (dieserMitarbeiter instanceof Angestellter) {
+			if (dieserMitarbeiter instanceof Arbeiter) {
 				anzahlArbeiter++;
 			}
 		}

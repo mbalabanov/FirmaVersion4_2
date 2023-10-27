@@ -25,6 +25,8 @@ class VerwaltungTest {
 		int actualAnzArbeiter = verwaltung.getAnzArbeiterGesamt(dieseMitarbeiterListe);
 		int expectedAnzArbeiter = 6;
 
+		System.out.println(actualAnzArbeiter);
+
 		// Assert
 		assertEquals(expectedAnzArbeiter, actualAnzArbeiter);
 	}
