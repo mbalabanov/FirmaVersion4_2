@@ -1,10 +1,15 @@
 package at.bfi.projekt.firma_v4_2.test;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import at.bfi.projekt.firma_v4_2.complete.Angestellter;
@@ -13,6 +18,19 @@ import at.bfi.projekt.firma_v4_2.complete.Mitarbeiter;
 import at.bfi.projekt.firma_v4_2.complete.Verwaltung;
 
 class VerwaltungTest {
+
+	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	private final PrintStream originalOut = System.out;
+
+	@BeforeEach
+	public void setUpStreams() {
+		System.setOut(new PrintStream(outContent));
+	}
+
+	@AfterEach
+	public void restoreStreams() {
+		System.setOut(originalOut);
+	}
 
 	@Test
 	void testGetAnzahlDerArbeiterGesamt() {
@@ -92,6 +110,21 @@ class VerwaltungTest {
 		// Act
 		String actualOutput = verwaltung.ausgabeMitarbeiterListe(dieseAbteilungsMitarbeiter);
 		String expectedOutput = "\nArbeiter\n========\nId: 4\nName: Eckehard\nStundenlohn: 27.80\nAnzahl der Stunden: 134\nSchichtzulage: 104.70\nBrutto: 3829.9";
+
+		// Assert
+		assertEquals(expectedOutput, actualOutput);
+	}
+
+	@Test
+	void testAusgabeEmptyMitarbeiterListe() {
+
+		// Arrange
+		Verwaltung verwaltung = new Verwaltung();
+		List<Mitarbeiter> dieseAbteilungsMitarbeiter = verwaltung.getMitarbeiterListeVonAbteilung(5);
+
+		// Act
+		String actualOutput = verwaltung.ausgabeMitarbeiterListe(dieseAbteilungsMitarbeiter);
+		String expectedOutput = "";
 
 		// Assert
 		assertEquals(expectedOutput, actualOutput);
@@ -182,6 +215,34 @@ class VerwaltungTest {
 
 		// Assert
 		assertEquals(expectedName, gefundenerMitarbeiter.getName());
+	}
+
+	@Test
+	void testSucheNullAbteilungsmitarbeiterNachID() {
+
+		// Arrange
+		Verwaltung verwaltung = new Verwaltung();
+
+		// Act
+		Mitarbeiter gefundenerMitarbeiter = verwaltung.searchMitarbeiterAusFirma(13);
+
+		// Assert
+		assertNull(gefundenerMitarbeiter);
+	}
+
+	@Test
+	void testAusgabeMitarbeiter() {
+
+		// Arrange
+		Verwaltung verwaltung = new Verwaltung();
+		Arbeiter testArbeiter_0 = new Arbeiter(1, "Klemens", 10, 10, 10);
+
+		// Act
+		verwaltung.ausgabe(testArbeiter_0);
+		String expectedOutput = "\nArbeiter\n========\nId: 1\nName: Klemens\nStundenlohn: 10.00\nAnzahl der Stunden: 10\nSchichtzulage: 10.00\nBrutto: 110.0\nNetto: 93.50\n";
+
+		// Assert
+		assertEquals(expectedOutput, outContent.toString());
 	}
 
 }
