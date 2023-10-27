@@ -18,14 +18,13 @@ class VerwaltungTest {
 	void testGetAnzahlDerArbeiterGesamt() {
 
 		// Arrange
-		Verwaltung verwaltung = new Verwaltung();
-		List<Mitarbeiter> dieseMitarbeiterListe = verwaltung.getMitarbeiter_Liste();
+		Verwaltung ersteVerwaltung = new Verwaltung();
+
+		List<Mitarbeiter> dieseMitarbeiterListe = ersteVerwaltung.getMitarbeiter_Liste();
 
 		// Act
-		int actualAnzArbeiter = verwaltung.getAnzArbeiterGesamt(dieseMitarbeiterListe);
+		int actualAnzArbeiter = ersteVerwaltung.getAnzArbeiterGesamt();
 		int expectedAnzArbeiter = 6;
-
-		System.out.println(actualAnzArbeiter);
 
 		// Assert
 		assertEquals(expectedAnzArbeiter, actualAnzArbeiter);
@@ -39,7 +38,7 @@ class VerwaltungTest {
 		List<Mitarbeiter> dieseMitarbeiterListe = verwaltung.getMitarbeiter_Liste();
 
 		// Act
-		int actualAnzAngestellte = verwaltung.getAnzAngestellterGesamt(dieseMitarbeiterListe);
+		int actualAnzAngestellte = verwaltung.getAnzAngestellterGesamt();
 		int expectedAnzAngestellte = 6;
 
 		// Assert
@@ -69,13 +68,13 @@ class VerwaltungTest {
 		final double ASSERTION_TAX_ARB = 0.15;
 
 		// Act
-		Arbeiter arbeiter_0 = new Arbeiter(1, "Klemens", 10, 10, 10);
-		Arbeiter arbeiter_1 = new Arbeiter(2, "Karoline", 20, 20, 20);
+		Arbeiter testArbeiter_0 = new Arbeiter(1, "Klemens", 10, 10, 10);
+		Arbeiter testArbeiter_1 = new Arbeiter(2, "Karoline", 20, 20, 20);
 
-		double nettoArbeiter_0 = verwaltung.berechneNettoGehalt(arbeiter_0);
-		double nettoArbeiter_1 = verwaltung.berechneNettoGehalt(arbeiter_1);
+		double nettoArbeiter_0 = verwaltung.berechneNettoGehalt(testArbeiter_0);
+		double nettoArbeiter_1 = verwaltung.berechneNettoGehalt(testArbeiter_1);
 
-		double assertionBruttoTemp = arbeiter_0.berechneBrutto() + arbeiter_1.berechneBrutto();
+		double assertionBruttoTemp = testArbeiter_0.berechneBrutto() + testArbeiter_1.berechneBrutto();
 		double expectedNetto = assertionBruttoTemp - (assertionBruttoTemp * ASSERTION_TAX_ARB);
 
 		// Assert

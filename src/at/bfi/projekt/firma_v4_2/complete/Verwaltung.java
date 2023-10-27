@@ -12,8 +12,8 @@ import java.util.List;
 public class Verwaltung implements Utility {
 
 	private Firma firma;
-	private static List<Mitarbeiter> mitarbeiter_Liste = new ArrayList<Mitarbeiter>();;
-	private static List<Abteilung> abteilungs_Liste = new ArrayList<Abteilung>();;
+	private List<Mitarbeiter> mitarbeiter_Liste = new ArrayList<Mitarbeiter>();;
+	private List<Abteilung> abteilungs_Liste = new ArrayList<Abteilung>();;
 
 	public Verwaltung() {
 		init();
@@ -39,6 +39,7 @@ public class Verwaltung implements Utility {
 		mitarbeiter_Liste.add(new Arbeiter(4, "Eckehard", 27.8, 134, 104.7));
 		mitarbeiter_Liste.add(new Arbeiter(5, "Juliane", 23.7, 124, 114.1));
 		mitarbeiter_Liste.add(new Arbeiter(6, "Erna", 22.5, 123, 111.8));
+
 		mitarbeiter_Liste.add(new Angestellter(7, "Mathis", 2400.00, 1211.30, 18.8));
 		mitarbeiter_Liste.add(new Angestellter(8, "Hardwin", 2800.00, 1309.80, 19.9));
 		mitarbeiter_Liste.add(new Angestellter(9, "Barthold", 1812.23, 992.20, 20.0));
@@ -65,6 +66,7 @@ public class Verwaltung implements Utility {
 				add(mitarbeiter_Liste.get(10));
 			}
 		}));
+
 		abteilungs_Liste.add(new Abteilung(3, ABTEILUNG_IT, new ArrayList<Mitarbeiter>() {
 			{
 				add(mitarbeiter_Liste.get(4));
@@ -72,15 +74,16 @@ public class Verwaltung implements Utility {
 				add(mitarbeiter_Liste.get(11));
 			}
 		}));
+
 		abteilungs_Liste.add(new Abteilung(4, ABTEILUNG_HR, new ArrayList<Mitarbeiter>() {
 			{
 				add(mitarbeiter_Liste.get(3));
 			}
 		}));
 
-		// Firma wird erstellt
 		Firma firma = new Firma(mitarbeiter_Liste, abteilungs_Liste);
 		this.firma = firma;
+
 	}
 
 	/**
@@ -188,10 +191,12 @@ public class Verwaltung implements Utility {
 	 * @param mitarbeiterListe
 	 * @return
 	 */
-	public int getAnzAngestellterGesamt(List<Mitarbeiter> mitarbeiterListe) {
+	public int getAnzAngestellterGesamt() {
+
+		List<Mitarbeiter> thisList = this.getMitarbeiter_Liste();
 		int anzahlAngestellte = 0;
 
-		for (Mitarbeiter dieserMitarbeiter : mitarbeiterListe) {
+		for (Mitarbeiter dieserMitarbeiter : mitarbeiter_Liste) {
 			if (dieserMitarbeiter instanceof Angestellter) {
 				anzahlAngestellte++;
 			}
@@ -204,32 +209,31 @@ public class Verwaltung implements Utility {
 	 * @param mitarbeiterListe
 	 * @return
 	 */
-	public int getAnzArbeiterGesamt(List<Mitarbeiter> mitarbeiterListe) {
+	public int getAnzArbeiterGesamt() {
 		int anzahlArbeiter = 0;
 
-		for (Mitarbeiter dieserMitarbeiter : mitarbeiterListe) {
+		for (Mitarbeiter dieserMitarbeiter : mitarbeiter_Liste) {
 			if (dieserMitarbeiter instanceof Arbeiter) {
 				anzahlArbeiter++;
 			}
 		}
-
 		return anzahlArbeiter;
 	}
 
-	public static List<Abteilung> getAbteilungs_Liste() {
+	public List<Abteilung> getAbteilungs_Liste() {
 		return abteilungs_Liste;
 	}
 
-	public static void setAbteilungs_Liste(List<Abteilung> abteilungs_Liste) {
-		Verwaltung.abteilungs_Liste = abteilungs_Liste;
+	public void setAbteilungs_Liste(List<Abteilung> abteilungs_Liste) {
+		abteilungs_Liste = abteilungs_Liste;
 	}
 
-	public static List<Mitarbeiter> getMitarbeiter_Liste() {
+	public List<Mitarbeiter> getMitarbeiter_Liste() {
 		return mitarbeiter_Liste;
 	}
 
-	public static void setMitarbeiter_Liste(List<Mitarbeiter> mitarbeiter_Liste) {
-		Verwaltung.mitarbeiter_Liste = mitarbeiter_Liste;
+	public void setMitarbeiter_Liste(List<Mitarbeiter> mitarbeiter_Liste) {
+		mitarbeiter_Liste = mitarbeiter_Liste;
 	};
 
 	public Firma getFirma() {
