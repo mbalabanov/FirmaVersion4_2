@@ -1,3 +1,10 @@
+/*
+ * 
+ * Firma V4.2 - Angestellter
+ * Marin Balabanov
+ * 
+ */
+
 package at.bfi.projekt.firma_v4_2.complete;
 
 public class Angestellter extends Mitarbeiter {

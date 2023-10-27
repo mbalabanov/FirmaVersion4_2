@@ -1,3 +1,10 @@
+/*
+ * 
+ * Firma V4.2 - Utility
+ * Marin Balabanov
+ * 
+ */
+
 package at.bfi.projekt.firma_v4_2.complete;
 
 public interface Utility {
