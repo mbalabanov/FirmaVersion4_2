@@ -1,5 +1,5 @@
 # Firma Version 4.2
-Dieses Repo enthält die Java-Lösung zum ersten Teil von Version 4 des Projekts "Firma".
+Dieses Repo enthält die Java-Lösung zu Version 4.2 des Projekts "Firma".
 
 Die Main-Datei ist `Verwaltung.java` allerdings befinden sich alle Tests in der Datei `VerwaltungTest.java` (insgesamt vierzehn JUnit-Tests).
 
